@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人社保计算</title>
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+ 
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		function jisuan(){
+			//1.获得公资看是否输入准确
+			var sal = document.getElementById("salary").value;
+			var reg = /^[0-9]{4,5}$/;
+			if (!reg.test(sal)){
+				document.getElementById("salary").value = "必须输入4-5位数字"
+				document.getElementById("salary").style = "color:red";
+				return;
+			}
+			//2.输入合法开始计算
+			var salnum = parseInt(sal)
+			var ylgr = salnum * 0.08;
+			var ylgs = salnum * 0.2;
+			document.getElementById("ylgr").innerHTML=ylgr;
+			document.getElementById("ylgs").innerHTML=ylgs;
+			var yigr = salnum * 0.02;
+			var yigs = salnum * 0.06;
+			document.getElementById("yigr").innerHTML=yigr;
+			document.getElementById("yigs").innerHTML=yigs;
+			var sygr = salnum * 0.005 ;
+			var sygs = salnum * 0.015 ;
+			document.getElementById("sygr").innerText=sygr;
+			document.getElementById("sygs").innerText=sygs;
+			var gs = salnum * 0.005;
+			document.getElementById("gs").innerHTML=gs;
+			var sy = salnum * 0.005;
+			document.getElementById("sy").innerHTML = sy;
+			var gjgr = salnum * 0.12
+			document.getElementById("gjgr").innerHTML = gjgr;
+			var gjgs = salnum * 0.12
+			document.getElementById("gjgs").innerHTML = gjgs;
+			var grhj = ylgr+yigr+sygr+gjgr;
+			document.getElementById("grhj").innerHTML = grhj;
+			var gshj = yigs+ ylgs+ sygs+sy+gjgs+gs;
+			document.getElementById("gshj").innerHTML = gshj;
+			var ze = salnum + gshj;
+			document.getElementById("ze").innerHTML = ze;
+			//3.算完填至单元格
+		}
+		function clearTxt(){
+			document.getElementById("salary").value = '';
+			document.getElementById("salary").style = 'color:black';
+		}
+	</script>
+	</head>
+	<body>
+		<div class="container-fluid text-center">
+			<img src="nuclogoblue.jpg" class="img-circle" width="100px" height="100px">
+			<table class="table table-bordered table-center table-striped">
+				<tr>
+					<td>工资</td>
+					<td colspan="3">
+						<input onclick="clearTxt()=''" type="text" id="salary" placeholder="请输入工资" class="form-control">
+					</td>
+					<td>
+						<button onclick="jisuan()" class="btn btn-danger btn-block">计算</button>
+					</td>
+				</tr>
+				<tr class="bg-primary">
+					<td>险种</td>
+					<td>个人%</td>
+					<td>个人</td>
+					<td>公司%</td>
+					<td>公司</td>
+				</tr>
+				<tr>
+					<td>养老</td>
+					<td>8%</td>
+					<td id="ylgr"></td>
+					<td>20%</td>
+					<td id="ylgs"></td>
+				</tr>
+				<tr>
+					<td>医疗</td>
+					<td>2%</td>
+					<td id="yigr"></td>
+					<td>8%</td>
+					<td id="yigs"></td>
+				</tr>
+				<tr>
+					<td>失业</td>
+					<td>0.5%</td>
+					<td id="sygr"></td>
+					<td>1.5%</td>
+					<td id="sygs"></td>
+				</tr>
+				<tr>
+					<td>工伤</td>
+					<td></td>
+					<td></td>
+					<td>0.5%</td>
+					<td id="gs"></td>
+				</tr>
+				<tr>
+					<td>生育</td>
+					<td></td>
+					<td></td>
+					<td>0.8%</td>
+					<td id="sy"></td>
+				</tr>
+				<tr>
+					<td>公积金</td>
+					<td>12%</td>
+					<td id="gjgr"></td>
+					<td>12%</td>
+					<td id="gjgs"></td>
+				</tr>
+				<tr>
+					<td>合计</td>
+					<td>个人合计</td>
+					<td id="grhj"></td>
+					<td>公司合计</td>
+					<td id="gshj"></td>
+				</tr>
+				<tr>
+					<td>总额</td>
+					<td  id="ze" colspan="4"></td>
+				</tr>
+			</table>
+			开发者：中北大学软件学院 2013041633 贾子博 执行单位：英才科技
+		</div>
+	</body>
+</html>
